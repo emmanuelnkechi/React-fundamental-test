@@ -8,7 +8,7 @@ const ContentProvider: React.FC<Props> = ({ children }) => {
 
   const toggleOpen = () => {
     setOpen(!open);
-    localStorage.setItem("collapseValue", !open);
+    localStorage.setItem("collapseValue", JSON.stringify(!open));
   };
 
   return (

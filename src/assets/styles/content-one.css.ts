@@ -56,12 +56,24 @@ export const themeButton = styleVariants({
     {
       background: vars.lightbtnTheme.background,
       color: vars.lightbtnTheme.color,
+      selectors: {
+        "&:hover": {
+          background: vars.darkbtnTheme.background,
+          color: vars.darkbtnTheme.color,
+        },
+      },
     },
   ],
   dark: [
     {
       background: vars.darkbtnTheme.background,
       color: vars.darkbtnTheme.color,
+      selectors: {
+        "&:hover": {
+          background: vars.lightbtnTheme.background,
+          color: vars.lightbtnTheme.color,
+        },
+      },
     },
   ],
 });
@@ -83,6 +95,12 @@ export const btnThemeStyle = styleVariants({
     {
       background: vars.lightbtnTheme.background,
       color: vars.lightbtnTheme.color,
+      selectors: {
+        "&:hover": {
+          background: vars.darkbtnTheme.background,
+          color: vars.darkbtnTheme.color,
+        },
+      },
     },
   ],
   dark: [
@@ -90,6 +108,12 @@ export const btnThemeStyle = styleVariants({
     {
       background: vars.darkbtnTheme.background,
       color: vars.darkbtnTheme.color,
+      selectors: {
+        "&:hover": {
+          background: vars.lightbtnTheme.background,
+          color: vars.lightbtnTheme.color,
+        },
+      },
     },
   ],
 });

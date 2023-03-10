@@ -1,4 +1,5 @@
-import { style } from "@vanilla-extract/css";
+import { style, styleVariants } from "@vanilla-extract/css";
+import { vars } from "./theme.css";
 
 export const secondContentStyle = style({
   padding: "4rem 2rem",
@@ -13,11 +14,25 @@ export const btnSectionStyle = style({
   flexWrap: "wrap",
 });
 
-export const deleteBtnStyles = style({
-  selectors: {
-    "&:disabled": {
-      opacity: "0.2",
-      cursor: "not-allowed",
+export const deleteBtnStyles = styleVariants({
+  light: [
+    {
+      selectors: {
+        "&:hover": {
+          background: vars.darkbtnTheme.background,
+          color: vars.darkbtnTheme.color,
+        },
+      },
     },
-  },
+  ],
+  dark: [
+    {
+      selectors: {
+        "&:hover": {
+          background: vars.lightbtnTheme.background,
+          color: vars.lightbtnTheme.color,
+        },
+      },
+    },
+  ],
 });

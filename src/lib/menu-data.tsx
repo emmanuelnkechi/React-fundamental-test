@@ -6,19 +6,20 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { routesConstant } from "../constants/routes-constant";
 
 export const menuData = [
   {
     id: 0,
     icon: <FontAwesomeIcon icon={faHouse as IconProp} />,
     text: "Page 1",
-    link: "/",
+    link: routesConstant.GET_PAGE1,
   },
   {
     id: 1,
     icon: <FontAwesomeIcon icon={faCircleInfo as IconProp} />,
     text: "Page 2",
-    link: "/page-2",
+    link: routesConstant.GET_PAGE1,
   },
 ];
 

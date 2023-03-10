@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext } from "react";
 import {
   secondContentStyle,
   btnSectionStyle,
@@ -6,8 +6,11 @@ import {
 } from "../../assets/styles/content-two.css";
 import Modal from "../modal/index";
 import useToggleModal from "../../hooks/useTogleModal";
+import { ThemeContext } from "../../context/themeContext";
+import { VariantInterface } from "../../model/common.interface";
 
 const ContentTwo = () => {
+  const { theme } = useContext(ThemeContext) as VariantInterface;
   const {
     toggleModal,
     showCTAModal,
@@ -15,6 +18,7 @@ const ContentTwo = () => {
     showDeleteModal,
     origin,
     disabledValue,
+    disabledShowValue,
     removeCount,
     deleteCount,
   } = useToggleModal();
@@ -23,18 +27,23 @@ const ContentTwo = () => {
     <div className={secondContentStyle}>
       <div>
         <div className={btnSectionStyle}>
-          <button onClick={() => toggleModal("Single CTA")}>Single CTA</button>
-          <button onClick={() => toggleModal("Remove Modal")}>
+          <button
+            onClick={() => toggleModal("Single CTA")}
+            className={deleteBtnStyles[theme]}
+          >
+            Single CTA
+          </button>
+          <button
+            onClick={() => toggleModal("Remove Modal")}
+            className={deleteBtnStyles[theme]}
+          >
             Remove {removeCount}
           </button>
           <button
-            className={deleteBtnStyles}
+            className={deleteBtnStyles[theme]}
             onClick={() => toggleModal("Delete Modal")}
-            disabled={disabledValue ? true : false}
           >
-            {disabledValue
-              ? `Disabled ${deleteCount}`
-              : `Delete ${deleteCount}`}
+            {disabledShowValue ? `${disabledValue}` : `Delete ${deleteCount}`}
           </button>
         </div>
         {showCTAModal && (

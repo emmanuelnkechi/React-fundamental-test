@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   firstContentStyle,
   leftWrapStyle,
@@ -12,29 +12,38 @@ import {
 } from "../../assets/styles/content-one.css";
 import { ThemeContext } from "../../context/themeContext";
 import { VariantInterface } from "../../model/common.interface";
+import { dateFormatter } from "../../lib/date-format";
 
 const ContentOne = () => {
+  const currentDate = dateFormatter();
   const [message, setMessage] = useState("");
-  const [showMessage, setShowMessage] = useState("");
+  const [, setShowMessage] = useState("");
   const [buttonCount, setButtonCount] = useState(0);
   const [multipleButtonMessages, setMultipleButtonMessages] = useState<
     string[]
   >([]);
   const [buttonSentMessages, setButtonSentMessages] = useState<string[]>([]);
-  const [clickMessages, setClickMessages] = useState<string[]>([]);
 
   //Get Theme value, message and toggle function from context
   const { toggleTheme, themeMessage } = useContext(ThemeContext);
   const { theme } = useContext(ThemeContext) as VariantInterface;
 
+  useEffect(() => {
+    setButtonSentMessages([themeMessage, ...buttonSentMessages]);
+  }, [themeMessage]);
+
   //Function that handles setting value from the textarea
-  const handleMessages = (e: any) => {
+  const handleMessages = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   };
 
   //Function that handles setting display message from the textarea when button is clicked
   const handleMessageClick = () => {
     setShowMessage(message);
+    setButtonSentMessages([
+      `${currentDate} Message Sent: ${message}`,
+      ...buttonSentMessages,
+    ]);
     setMessage("");
   };
 
@@ -45,16 +54,18 @@ const ContentOne = () => {
     let newMessages = multipleButtonMessages;
     newMessages.push(`Button ${newCount}`);
     setMultipleButtonMessages(newMessages);
-    let sentMessages = buttonSentMessages;
-    sentMessages.push(`Button ${newCount} added`);
-    setButtonSentMessages(sentMessages);
+    setButtonSentMessages([
+      `${currentDate} Button ${newCount} added`,
+      ...buttonSentMessages,
+    ]);
   };
 
   //Function that handles setting display message when added buttons are clicked
   const handleButtonClicks = (count: number) => {
-    let newClickMessage = [...clickMessages];
-    newClickMessage.push(`Button ${count + 1} clicked`);
-    setClickMessages(newClickMessage);
+    setButtonSentMessages([
+      `${currentDate} Button ${count + 1} clicked`,
+      ...buttonSentMessages,
+    ]);
   };
 
   return (
@@ -103,24 +114,7 @@ const ContentOne = () => {
 
       <div className={rightWrapStyle[theme]}>
         <div>
-          {" "}
-          <p>{themeMessage}</p>
-        </div>
-        {themeMessage && <hr />}
-
-        <div>{showMessage && <p>Message Sent: {showMessage}</p>}</div>
-
-        {showMessage && <hr />}
-
-        <div>
           {buttonSentMessages.map((message, index) => (
-            <p key={index}>{message}</p>
-          ))}
-        </div>
-        {buttonSentMessages.length > 0 && <hr />}
-
-        <div>
-          {clickMessages.map((message, index) => (
             <p key={index}>{message}</p>
           ))}
         </div>

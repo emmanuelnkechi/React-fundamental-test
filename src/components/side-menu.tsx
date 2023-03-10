@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { menuData, collapseIcon } from "../lib/menu-data";
 import { NavLink } from "react-router-dom";
 import {
@@ -6,7 +6,6 @@ import {
   sidenavClosed,
   sideItem,
   linkText,
-  linkTextClosed,
   menuBtn,
   toolTipText,
 } from "../assets/styles/side-menu.css";
